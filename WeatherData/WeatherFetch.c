@@ -19,7 +19,7 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, struct url_data *data) {
 #ifdef DEBUG
     fprintf(stderr, "data at %p size=%ld nmemb=%ld\n", ptr, size, nmemb);
 #endif
-    tmp = realloc(data->data, data->size + 1); /* +1 for '\0' */
+    tmp = realloc(data->data, data->size + 1); 
 
     if(tmp) {
         data->data = tmp;
@@ -74,7 +74,11 @@ int main(int argc, char* argv[]) {
     char* Weatherdata;
 
     if(argc < 2) {
-        fprintf(stderr, "Provide City Name(IATA code-3 letter).\n");
+	printf(" \n");
+        fprintf(stderr, "Provide City Name ID :WeatherFetch <City Name String> \n");
+	printf(" Sydney :SYD \r\n Melbourne:MEL \r\n Adelaide:ADL \r\n");
+	printf(" QueensLand:QLD \r\n Tasmania:TAS \r\n Victoria:VIC \r\n");
+	printf(" Kempsey:KPS \r\n New Castle:NTL \r\n Perth:PER \r\n Maryborough:MBH \r\n");
         return 1;
     }
 
@@ -85,9 +89,33 @@ int main(int argc, char* argv[]) {
 	strcpy(argv[1],URL_MEL);
     }
     else if(strcmp(argv[1],"ADL")==0){
-	strcpy(argv[1],URL_MEL);
+	strcpy(argv[1],URL_ADL);
     }
-
+    else if(strcmp(argv[1],"QLD")==0){
+	strcpy(argv[1],URL_QLD);
+    }
+    else if(strcmp(argv[1],"TAS")==0){
+	strcpy(argv[1],URL_TAS);
+    }
+    else if(strcmp(argv[1],"VIC")==0){
+	strcpy(argv[1],URL_VIC);
+    }
+    else if(strcmp(argv[1],"KPS")==0){
+	strcpy(argv[1],URL_KPS);
+    }
+    else if(strcmp(argv[1],"NTL")==0){
+	strcpy(argv[1],URL_NTL);
+    }
+    else if(strcmp(argv[1],"PER")==0){
+	strcpy(argv[1],URL_PER);
+    }
+    else if(strcmp(argv[1],"MBH")==0){
+	strcpy(argv[1],URL_MBH);
+    }
+    else{
+	printf("Invalid Station or Station Unavailable !!!!\n");
+	return 1;
+    }
     Weatherdata = handle_url(argv[1]);
     
 
