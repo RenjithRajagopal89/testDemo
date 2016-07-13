@@ -1,0 +1,24 @@
+#Test Application for Fetching Weather Forecast data
+
+#Build Steps
+
+Execute following commands from Working folder-WeatherData
+
+1.make or make all
+This produce an executable "WeatherFetch"
+
+#Execute application in following format
+
+./WeatherFetch "3 letter IATA code" 
+
+e.g ./WeatherFetch "SYD" for collecting weather forecast for sydney
+
+#Limitations
+Synchronous I/F(Blocked I/O)
+Unparsed Output Data
+
+#Prerequisites
+
+Weather forecast application uses libcurl shared library API(libcurl-gnutls.so.4)
+
+Linux distro should contains package for libcurl
