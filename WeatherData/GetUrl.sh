@@ -13,6 +13,8 @@ StationCode=`cat Station.txt`
 HTTemp=`echo $weatherdata |  sed -e 's/^.*temperature value=\"//' -e 's/\".*$//'` 
 #grep -E '(<temperature |/\\>)' |
 
+tc=$(echo "($HTTemp-273.15)"|bc)
+
 #Parse and fetches Longitude 
 Longi=`echo $weatherdata | grep -E '(<coord |/\\>)' | sed -e 's/^.*coord lon=\"//' -e 's/\".*$//'` 
 
@@ -33,7 +35,7 @@ Humidity=`echo $weatherdata | grep -E '(<humidity |/\\>)' | sed -e 's/^.*humidit
 DateTime=`echo $weatherdata | grep -E '(<lastupdate |/\\>)' | sed -e 's/^.*lastupdate value=\"//' -e 's/\".*$//'`
 
 # Display Weather forecast informations
-echo "$StationCode | $Longi , $Lat | $DateTime | $ConditionWeather | $HTTemp °F | $Pressure hPa | $Humidity %"
+echo "$StationCode | $Longi , $Lat | $DateTime | $ConditionWeather | $tc °C | $Pressure hPa | $Humidity %"
 
 
 
