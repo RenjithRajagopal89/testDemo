@@ -10,7 +10,8 @@ StationCode=`cat Station.txt`
 ## Extract Weather data based on XML output
 
 #Parse and fetches Temperature 
-HTTemp=`echo $weatherdata | grep -E '(<temperature |/\\>)' | sed -e 's/^.*temperature value=\"//' -e 's/\".*$//'` 
+HTTemp=`echo $weatherdata |  sed -e 's/^.*temperature value=\"//' -e 's/\".*$//'` 
+#grep -E '(<temperature |/\\>)' |
 
 #Parse and fetches Longitude 
 Longi=`echo $weatherdata | grep -E '(<coord |/\\>)' | sed -e 's/^.*coord lon=\"//' -e 's/\".*$//'` 
@@ -20,7 +21,7 @@ Lat=`echo $weatherdata | grep -E '(<coord |/\\>)' | sed -e 's/^.*lat=\"//' -e 's
 
 
 #Parse and fetches Condition 
-#condition= `echo $weatherdata | grep -E '(<speed |/\\>)' | sed -e 's/^.*speed value=\"//' -e 's/\".*$//'`
+ConditionWeather=`echo $weatherdata | grep -E '(<speed |/\\>)' | sed -e 's/^.*name=\"//' -e 's/\".*$//'`
 
 #Parse and fetches Pressure
 Pressure=`echo $weatherdata | grep -E '(<pressure |/\\>)' | sed -e 's/^.*pressure value=\"//' -e 's/\".*$//'`
@@ -32,7 +33,7 @@ Humidity=`echo $weatherdata | grep -E '(<humidity |/\\>)' | sed -e 's/^.*humidit
 DateTime=`echo $weatherdata | grep -E '(<lastupdate |/\\>)' | sed -e 's/^.*lastupdate value=\"//' -e 's/\".*$//'`
 
 # Display Weather forecast informations
-echo "$StationCode | $Longi , $Lat | $DateTime| $HTTemp °F| $Pressure hPa | $Humidity %"
+echo "$StationCode | $Longi , $Lat | $DateTime | $ConditionWeather | $HTTemp °F | $Pressure hPa | $Humidity %"
 
 
 
